@@ -14,6 +14,7 @@ from bokeh.application import Application
 from bokeh.application.handlers.function import FunctionHandler
 from tornado.ioloop import IOLoop
 import threading
+from gunicorn import util
 
 
 app = Flask(__name__) #constructor for flask webapp
@@ -95,8 +96,10 @@ def index():
 @app.route("/bokeh-map")
 def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
-    script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
+    #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
+    script = server_document('/bkapp')
     return render_template("bokeh-map.html", script=script)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    #app.run(host="0.0.0.0", port=5000, debug=True)
+    #app.run(debug=True)
