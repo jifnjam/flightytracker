@@ -45,6 +45,7 @@ executing==1.1.0
 fastjsonschema==2.16.2
 ffmpeg==1.4
 filelock==3.8.0
+filetype==1.2.0
 Fiona==1.8.22
 Flask==3.1.0
 flatbuffers==23.5.26
@@ -77,10 +78,11 @@ jupyter_client==7.3.5
 jupyterlab-pygments==0.2.2
 jupyterlab-widgets==3.0.3
 jupyterlab_server==2.15.2
-kivy-deps.angle==0.3.3
+Kivy==2.3.1
+kivy-deps.angle==0.4.0
 kivy-deps.glew==0.3.1
-kivy-deps.sdl2==0.6.0
 Kivy-Garden==0.1.5
+kivy_deps.sdl2==0.8.0
 kivymd==1.1.1
 kiwisolver==1.4.4
 libretranslatepy==2.1.1
