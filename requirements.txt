@@ -117,7 +117,6 @@ prompt-toolkit==3.0.31
 psutil==5.9.2
 pure-eval==0.2.2
 pycparser==2.21
-pygeos==0.13
 Pygments==2.13.0
 pyModeS==2.11
 PyMySQL==1.0.2
