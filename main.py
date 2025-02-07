@@ -12,7 +12,7 @@ from bokeh.application import Application
 from bokeh.application.handlers.function import FunctionHandler
 from tornado.ioloop import IOLoop
 import threading
-from gunicorn import util
+from waitress import serve
 
 
 app = Flask(__name__) #constructor for flask webapp
@@ -101,3 +101,4 @@ def update_map():
 if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
     #app.run(debug=True)
+    serve(app, host="0.0.0.0", port=5000)
