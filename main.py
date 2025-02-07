@@ -91,7 +91,7 @@ thread.start()
 def index():
      return render_template("index.html") # flight map file
 
-@app.route("/bokeh-map")
+@app.route("/bkapp")
 def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
