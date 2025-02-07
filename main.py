@@ -4,10 +4,16 @@ import pandas as pd
 import geopandas as gpd
 from bokeh.plotting import figure, show
 from bokeh.resources import CDN
-from bokeh.embed import file_html
+from bokeh.embed import file_html, server_document
 from bokeh.models import ColumnDataSource, HoverTool, LabelSet
 from pyproj import Transformer
 import numpy as np
+from bokeh.io import curdoc
+from bokeh.server.server import Server
+from bokeh.application import Application
+from bokeh.application.handlers.function import FunctionHandler
+from tornado.ioloop import IOLoop
+import threading
 
 
 app = Flask(__name__) #constructor for flask webapp
@@ -39,18 +45,19 @@ def get_flights():
      
      
      mercator = wgs84_to_web_mercator(fdf)
-     print(mercator.head())
-     return fdf, mercator
+     #print(mercator.head())
+     return mercator
 
-def flight_map():
+def flight_map(doc):
      """Make a map"""
 
-     df, loc_df = get_flights()
+     #def update():
+     loc_df = get_flights()
 
      flight_source = ColumnDataSource(data=loc_df)
      p = figure(x_range=(-15187814, -6458032), y_range=(2505715, 6567666),
                x_axis_type="mercator", y_axis_type="mercator", sizing_mode="scale_both", height=500)
-     
+
      p.add_tile("CartoDB Positron", retina=True)
 
      p.scatter(x='x', y='y', size=8, color="indigo", source=flight_source)
@@ -58,23 +65,38 @@ def flight_map():
      my_hover=HoverTool()
      my_hover.tooltips=[('Call Sign','@callsign'),('Origin Country','@ctry'),('Velocity(m/s)','@velocity')]
      p.add_tools(my_hover)
+     
+     def update():
+          new_data = get_flights()
+          flight_source.data = new_data.to_dict(orient="list")
 
+     doc.add_root(p)       
+     doc.add_periodic_callback(update, 5000)
+     #return p, flight_source 
+     #return file_html(p, CDN, "Flight Map")
 
-     return show(p)
+bokeh_app = Application(FunctionHandler(flight_map))
 
-flight_map()
+# Run Bokeh server in background
+def bk_worker():
+    ioloop = IOLoop.current()
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006)
+    server.start()
+    ioloop.start()
 
-
-
-
-
-
-
-
+# Ensure the Bokeh server starts before Flask
+thread = threading.Thread(target=bk_worker, daemon=True)
+thread.start()
 
 @app.route("/")
 def index():
      return render_template("index.html") # flight map file
 
-#if __name__ == "__main__":
-#     app.run(debug=True)
+@app.route("/bokeh-map")
+def update_map():
+    """Return only the updated Bokeh map for HTMX to fetch."""
+    script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
+    return render_template("bokeh-map.html", script=script)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
