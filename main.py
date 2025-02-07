@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, redirect 
 import requests
 import pandas as pd
-import geopandas as gpd
 from bokeh.plotting import figure, show
 from bokeh.resources import CDN
 from bokeh.embed import file_html, server_document
 from bokeh.models import ColumnDataSource, HoverTool, LabelSet
-from pyproj import Transformer
 import numpy as np
 from bokeh.io import curdoc
 from bokeh.server.server import Server
