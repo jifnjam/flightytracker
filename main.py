@@ -13,6 +13,7 @@ from bokeh.application.handlers.function import FunctionHandler
 from tornado.ioloop import IOLoop
 import threading
 from waitress import serve
+import os
 
 
 app = Flask(__name__) #constructor for flask webapp
@@ -80,8 +81,10 @@ bokeh_app = Application(FunctionHandler(flight_map))
 
 # Run Bokeh server in background
 def bk_worker():
+    dport = int(os.environ.get("PORT", 5006))
+
     ioloop = IOLoop.current()
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=5006)
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=dport)
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006)
     server.start()
     ioloop.start()
