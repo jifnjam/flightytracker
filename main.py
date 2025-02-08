@@ -71,6 +71,8 @@ def flight_map(doc):
 
      doc.add_root(p)       
      doc.add_periodic_callback(update, 5000)
+
+
      #return p, flight_source 
      #return file_html(p, CDN, "Flight Map")
 
@@ -79,7 +81,8 @@ bokeh_app = Application(FunctionHandler(flight_map))
 # Run Bokeh server in background
 def bk_worker():
     ioloop = IOLoop.current()
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com", "*.render.com"], port=5000)
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=5006)
+    #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006)
     server.start()
     ioloop.start()
 
@@ -95,10 +98,11 @@ def index():
 def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
-    script = server_document('/bkapp')
+    script = server_document('https://flightytracker.onrender.com/bkapp')
+    print(script)
     return render_template("bokeh-map.html", script=script)
 
 if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
-    #app.run(debug=True)
-    pass
+    app.run()
+    #pass
