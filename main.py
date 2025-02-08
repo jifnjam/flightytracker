@@ -84,7 +84,8 @@ def bk_worker():
     dport = int(os.environ.get("PORT", 5006))
 
     ioloop = IOLoop.current()
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=dport)
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=dport, 
+                    address="0.0.0.0")
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006)
     server.start()
     ioloop.start()
@@ -105,7 +106,10 @@ def update_map():
     print(script)
     return render_template("bokeh-map.html", script=script)
 
+dport = int(os.environ.get("PORT", 5006))
+
 if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
-    app.run()
+    #app.run()
+    serve(app, host="0.0.0.0", port=dport)
     #pass
