@@ -81,12 +81,12 @@ bokeh_app = Application(FunctionHandler(flight_map))
 
 # Run Bokeh server in background
 def bk_worker():
-    dport = 5100
+    #dport = 5100
 
     ioloop = IOLoop.current()
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=dport, 
-                    address="0.0.0.0", proxy_address="https://flightytracker.onrender.com")
-    #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006)
+    #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], port=dport, address="0.0.0.0", proxy_address="https://flightytracker.onrender.com")
+    #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["flightytracker.onrender.com"], address="0.0.0.0")
     server.start()
     ioloop.start()
 
@@ -103,10 +103,9 @@ def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
     script = server_document('https://flightytracker.onrender.com/bkapp', relative_urls=True)
-    print(script)
     return render_template("bokeh-map.html", script=script)
 
-dport = int(os.environ.get("PORT", 5006))
+dport = int(os.environ.get("PORT", 5000))
 
 if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
