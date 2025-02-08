@@ -14,8 +14,6 @@ from tornado.ioloop import IOLoop
 import threading
 from waitress import serve
 import os
-from daphne import server
-from main import app
 
 
 app = Flask(__name__) #constructor for flask webapp
