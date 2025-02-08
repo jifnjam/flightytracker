@@ -107,7 +107,7 @@ def update_map():
     return render_template("bokeh-map.html", script=script)
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
-    #app.run()
+    app.run()
     #pass
