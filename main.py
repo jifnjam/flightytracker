@@ -14,6 +14,8 @@ from tornado.ioloop import IOLoop
 import threading
 from waitress import serve
 import os
+from daphne import server
+from main import app
 
 
 app = Flask(__name__) #constructor for flask webapp
@@ -107,8 +109,8 @@ def update_map():
     return render_template("bokeh-map.html", script=script)
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
     #app.run()
     #pass
-    serve(app, host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    #serve(app, host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
