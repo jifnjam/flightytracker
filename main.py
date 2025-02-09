@@ -84,7 +84,7 @@ def bk_worker():
 
     ioloop = IOLoop.current()
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=10000) 
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006, address="127.0.0.1") 
     server.start()
     ioloop.start()
 
@@ -100,7 +100,7 @@ def index():
 def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
-    script = server_document("https://flightytracker.onrender.com/bkapp")
+    script = server_document("http://127.0.0.1:5006/bkapp")
     return render_template("bokeh-map.html", script=script)
 
 
