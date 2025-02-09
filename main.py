@@ -84,7 +84,7 @@ def bk_worker():
 
     ioloop = IOLoop.current()
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=10000) 
     server.start()
     ioloop.start()
 
@@ -108,5 +108,3 @@ def update_map():
     #app.run(host="0.0.0.0", port=5000, debug=True)
     #app.run()
     #pass
-    #serve(app, host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-    #serve(app, host='0.0.0.0', port=5000)
