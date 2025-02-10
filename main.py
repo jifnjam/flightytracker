@@ -91,8 +91,7 @@ def bk_worker():
 
     ioloop = IOLoop.current()
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-    logging.info("Starting Bokeh server on https://flightytracker.onrender.com/bkapp")
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006, address="0.0.0.0") 
 
     server.start()
     ioloop.start()
@@ -119,6 +118,14 @@ def test_bokeh():
           return f"Status: {r.status_code}, Content: {r.text[:500]}"
      except Exception as e:
           return f"Error: {str(e)}"
+
+@app.route("/test-script")
+def test_script():
+     try:
+          script = server_document("https://flightytracker.onrender.com/bkapp")
+     except Exception as e:
+          logging.error(f"Error fetching Bokeh script: {e}")
+          script = "<!-- Failed to load Bokeh -->"
 
 
 #if __name__ == "__main__":
