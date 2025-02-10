@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self'; 
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'blob:' https://cdn.bokeh.org/bokeh/release/bokeh-3.6.0.min.js https://flightytracker.onrender.com; 
-    connect-src 'self' ws://flightytracker.onrender.com wss://flightytracker.onrender.com; 
-    img-src 'self' data: https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js; 
-    style-src 'self' 'unsafe-inline' https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js; 
-    frame-src 'self' https://flightytracker.onrender.com;">
-    <title>Flight Tracker</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">    <title>Flight Tracker</title>
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js"></script>
 </head>
 <body>
