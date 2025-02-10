@@ -91,8 +91,8 @@ def bk_worker():
 
     ioloop = IOLoop.current()
     #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006, address="127.0.0.1") 
-    logging.info("Starting Bokeh server on http://127.0.0.1:5006/bkapp")
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
+    logging.info("Starting Bokeh server on https://flightytracker.onrender.com/bkapp")
 
     server.start()
     ioloop.start()
@@ -109,18 +109,30 @@ def index():
 def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
-    script = server_document("http://127.0.0.1:5006/bkapp")
+    script = server_document("https://flightytracker.onrender.com/bkapp")
     logging.info(f"Bokeh script URL: {script}")
+    print("Bokeh Output:", script)
     return render_template("bokeh-map.html", script=script)
 
 @app.route("/test-bokeh")
 def test_bokeh():
      try:
-          r = requests.get("http://127.0.0.1:5006/bkapp")
+          r = requests.get("https://flightytracker.onrender.com/bkapp")
           return f"Status: {r.status_code}, Content: {r.text[:500]}"
      except Exception as e:
           return f"Error: {str(e)}"
      
+@app.after_request
+def add_csp_headers(response):
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.bokeh.org https://flightytracker.onrender.com; "
+        "connect-src 'self' ws://flightytracker.onrender.com wss://flightytracker.onrender.com; "
+        "img-src 'self' data: https://cdn.bokeh.org; "
+        "style-src 'self' 'unsafe-inline' https://cdn.bokeh.org; "
+        "frame-src 'self' https://flightytracker.onrender.com"
+    )
+    return response
 
 #if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
