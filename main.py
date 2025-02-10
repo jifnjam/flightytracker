@@ -51,12 +51,6 @@ def get_flights():
 def flight_map(doc):
      """Make a map"""
 
-     if doc is None:
-          logging.error("Bokeh doc is returning nothing! Something is wrong. Check it out.")
-          return
-     
-     logging.info("Bokeh flight map is generating")
-
      loc_df = get_flights()
 
      flight_source = ColumnDataSource(data=loc_df)
@@ -88,11 +82,8 @@ bokeh_app = Application(FunctionHandler(flight_map))
 
 # Run Bokeh server in background
 def bk_worker():
-
     ioloop = IOLoop.current()
-    #server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
     server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
-
     server.start()
     ioloop.start()
 
@@ -106,29 +97,10 @@ def index():
 
 @app.route("/bkapp")
 def update_map():
-    """Return only the updated Bokeh map for HTMX to fetch."""
-    #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
-    script = server_document("https://flightytracker.onrender.com/bkapp")
+    """Return only the updated Bokeh map to be fetched."""
+    script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
+    #script = server_document("/bkapp")
     return render_template("bokeh-map.html", script=script)
 
-@app.route("/test-bokeh")
-def test_bokeh():
-     try:
-          r = requests.get("https://flightytracker.onrender.com/bkapp")
-          return f"Status: {r.status_code}, Content: {r.text[:500]}"
-     except Exception as e:
-          return f"Error: {str(e)}"
-
-@app.route("/test-script")
-def test_script():
-     try:
-          script = server_document("https://flightytracker.onrender.com/bkapp")
-     except Exception as e:
-          logging.error(f"Error fetching Bokeh script: {e}")
-          script = "<!-- Failed to load Bokeh -->"
-
-
-#if __name__ == "__main__":
-    #app.run(host="0.0.0.0", port=5000, debug=True)
-    #app.run()
-    #pass
+if __name__ == "__main__":
+    app.run(debug=True)
