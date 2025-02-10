@@ -110,8 +110,6 @@ def update_map():
     """Return only the updated Bokeh map for HTMX to fetch."""
     #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
     script = server_document("https://flightytracker.onrender.com/bkapp")
-    logging.info(f"Bokeh script URL: {script}")
-    print("Bokeh Output:", script)
     return render_template("bokeh-map.html", script=script)
 
 @app.route("/test-bokeh")
