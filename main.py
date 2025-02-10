@@ -14,11 +14,12 @@ from tornado.ioloop import IOLoop
 import threading
 from waitress import serve
 import logging
+import os
 
 
 app = Flask(__name__) #constructor for flask webapp
 
-url = "https://opensky-network.org/api/states/all?lamin=30.038&lomin=-125.974&lamax=52.214&lomax=-68.748"
+url = "https://otmmint:CFuMr9M84mXigLz@opensky-network.org/api/states/all?lamin=30.038&lomin=-125.974&lamax=52.214&lomax=-68.748"
 
 #DATA FRAME CONVERSION
 def wgs84_to_web_mercator(df, lon="longitude", lat="latitude"):
@@ -98,9 +99,9 @@ def index():
 @app.route("/bkapp")
 def update_map():
     """Return only the updated Bokeh map to be fetched."""
-    script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
-    #script = server_document("/bkapp")
+    #script = server_document('http://localhost:5006/bkapp')  # Embed the Bokeh app
+    script = server_document("/bkapp")
     return render_template("bokeh-map.html", script=script)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=os.get("PORT", default=5000))
