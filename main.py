@@ -84,7 +84,8 @@ bokeh_app = Application(FunctionHandler(flight_map))
 # Run Bokeh server in background
 def bk_worker():
     ioloop = IOLoop.current()
-    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=5006) 
+    port = int(os.getenv("BOKEH_PORT", 5006))
+    server = Server({'/bkapp': bokeh_app}, io_loop=ioloop, allow_websocket_origin=["*"], port=port) 
     server.start()
     ioloop.start()
 
