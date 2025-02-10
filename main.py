@@ -121,18 +121,7 @@ def test_bokeh():
           return f"Status: {r.status_code}, Content: {r.text[:500]}"
      except Exception as e:
           return f"Error: {str(e)}"
-     
-@app.after_request
-def add_csp_headers(response):
-    response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.bokeh.org https://flightytracker.onrender.com; "
-        "connect-src 'self' ws://flightytracker.onrender.com wss://flightytracker.onrender.com; "
-        "img-src 'self' data: https://cdn.bokeh.org; "
-        "style-src 'self' 'unsafe-inline' https://cdn.bokeh.org; "
-        "frame-src 'self' https://flightytracker.onrender.com"
-    )
-    return response
+
 
 #if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=5000, debug=True)
