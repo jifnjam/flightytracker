@@ -21,4 +21,5 @@ df = pd.DataFrame(data={
      "languages": lang_list[0],
      'car': response[0]['car']['side']})
 
-print(df.head())
+for i in df.itertuples():
+     print(i[4])

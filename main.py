@@ -4,8 +4,8 @@ import pandas as pd
 import os
 
 
-app = Flask(__name__) #constructor for flask webapp
-app.secret_key = os.urandom(10).hex() #generate random secret key for sessions
+app = Flask(__name__)
+app.secret_key = os.urandom(10).hex()
 
 @app.route("/")
 def index():
@@ -47,8 +47,32 @@ def trivia_submit():
             correct_answers += 1 # add to the score
 
     # Return the result to the user
-
     return render_template("results.html", score=correct_answers)
+
+@app.route("/ctry-info", methods=["GET", "POST"])
+def ctry_info():
+    if request.method == 'POST':
+        ctry = request.form.get("ctryname")
+        r = requests.get("https://restcountries.com/v3.1/name/f'{ctry}?fields=name,capital,currencies,languages,car")
+        response = r.json()
+
+        for i in response[0]['currencies'].items():
+            currency_list = []
+            currency_list.append(i[1]['name'])
+
+        for i in response[0]['languages'].items():
+            lang_list = []
+            lang_list.append(i[1])
+
+        df = pd.DataFrame(data={
+            "name": response[0]['name']['common'],
+            "currencies": currency_list[0],
+            "capital": response[0]['capital'],
+            "languages": lang_list[0],
+            'car': response[0]['car']['side']})
+        
+        return render_template("country-results.html", results=df)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

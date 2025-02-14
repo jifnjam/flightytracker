@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Flighty Tracker - Live Flight Tracker Map</title>
+     <script src="https://kit.fontawesome.com/b5e01068a9.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="static/ctry.css">
+</head>
+
+<body>
+     <div class="grid-container">
+          <header class="header">
+               <nav>
+                    <a>Trivia Questions</a> <!--https://opentdb.com/-->
+                    <a>Country Info</a> <!--https://github.com/SteinRobert/python-restcountries-->
+                    <a id="navtitle">Flighty Tracker</a>
+               </nav>
+               <h1>Flighty Tracker</h1>
+               <h2 id="intro">Country Info Gatherer</h2>
+               <h3 id="power">Powered by <a href="http://restcountries.com">http://restcountries.com</a></h3>
+               <p>Here you can gather some basic information about the country you're traveling to.</p>
+               <p>Currencies, languages, calling codes, capital, etc. are provided. </p>
+          </header>
+          <div class="main">
+               {% for i in result.itertuples() %}
+               <p>Country: {{i[0]}}</p>
+               <p>Currency: {{i[1]}}</p>
+               <p>Capital: {{i[2]}}</p>
+               <p>Languages: {{i[3]}}</p>
+               <p>What side of the street do cars drive on? {{i[4]}}</p>
+               {% endfor %}
+          </div>
+          <footer class="footer">This is an open-source project not intended for commercial purposes. &#169 Flighty
+               Tracker
+               <ul>
+                    <a style="color:black;" href="https://github.com/jifnjam/flightytracker"><i
+                              class="fa-brands fa-github"></i></a>
+               </ul>
+          </footer>
+     </div>
+</body>
+
+</html>
