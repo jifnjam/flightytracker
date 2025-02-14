@@ -1,0 +1,52 @@
+body {
+     font-family: Arial, sans-serif;
+     text-align: center;
+     margin: 20px;
+     background-color: #f4f4f4;
+}
+.quiz-container {
+     max-width: 700px;
+     margin: auto;
+     padding: 20px;
+     background: white;
+     border-radius: 10px;
+     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+     text-align: left;
+}
+.question {
+     font-size: 18px;
+     font-weight: bold;
+     margin-top: 20px;
+}
+.options {
+     margin-bottom: 20px;
+}
+.options label {
+     display: block;
+     padding: 10px;
+     margin: 5px 0;
+     border-radius: 5px;
+     background-color: #007BFF;
+     color: white;
+     cursor: pointer;
+     transition: 0.3s;
+}
+.options input {
+     display: none; /* Hides default radio button */
+}
+.options input:checked + label {
+     background-color: #0056b3;
+     border: 2px solid #000;
+}
+.submit-btn {
+     margin-top: 20px;
+     padding: 12px 20px;
+     font-size: 16px;
+     border: none;
+     background-color: green;
+     color: white;
+     cursor: pointer;
+     border-radius: 5px;
+     display: block;
+     width: 100%;
+}

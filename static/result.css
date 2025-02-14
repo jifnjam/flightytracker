@@ -1,0 +1,28 @@
+body {
+     font-family: Arial, sans-serif;
+     text-align: center;
+     margin: 20px;
+
+}
+
+.grid-container {
+     display: grid;
+     grid-template-areas:
+       'header header header header header header' 
+       'left main main main main right'
+       'footer footer footer footer footer footer';
+     gap: 20px 15px;
+}
+
+.main {
+     grid-area: main;
+}
+
+.results-container {
+     max-width: 600px;
+     margin: auto;
+     padding: 20px;
+     border: 1px solid #ddd;
+     border-radius: 10px;
+     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}

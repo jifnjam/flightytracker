@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Flighty Tracker - Trivia</title>
+     <script src="https://kit.fontawesome.com/b5e01068a9.js"></script>
+     <link rel="stylesheet" href="static/trivia.css">
+</head>
+
+<body>
+     <div>
+          <header class="header">
+               <nav>
+                    <a>Language Translator</a>
+                    <a>Wikipedia Searcher</a>
+                    <a>Trivia Questions</a>
+                    <a>Airport Info</a>
+                    <a>Country Info</a>
+                    <a id="navtitle">Flighty Tracker</a>
+               </nav>
+               <h1>Trivia</h1>
+               <h2 id="intro">Test your geography and history skills here to
+                    broaden your knowledge of the great world around you.
+               </h2>
+          </header>
+          <div class="quiz-container">
+               <form action="/trivia-submit" method="POST">
+                    <!-- Question 1 -->
+                    <p>1. {{ questions[0]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q1_opt1" name="answer1" value="{{ questions[0]['options'][0] }}"
+                              required>
+                         <label for="q1_opt1">{{ questions[0]['options'][0] }}</label><br>
+                         <input type="radio" id="q1_opt2" name="answer1" value="{{ questions[0]['options'][1] }}"
+                              required>
+                         <label for="q1_opt2">{{ questions[0]['options'][1] }}</label><br>
+                         <input type="radio" id="q1_opt3" name="answer1" value="{{ questions[0]['options'][2] }}"
+                              required>
+                         <label for="q1_opt3">{{ questions[0]['options'][2] }}</label><br>
+                         <input type="radio" id="q1_opt4" name="answer1" value="{{ questions[0]['options'][3] }}"
+                              required>
+                         <label for="q1_opt4">{{ questions[0]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <p>2. {{ questions[1]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q2_opt1" name="answer2" value="{{ questions[1]['options'][0] }}"
+                              required>
+                         <label for="q2_opt1">{{ questions[1]['options'][0] }}</label><br>
+                         <input type="radio" id="q2_opt2" name="answer2" value="{{ questions[1]['options'][1] }}"
+                              required>
+                         <label for="q2_opt2">{{ questions[1]['options'][1] }}</label><br>
+                         <input type="radio" id="q2_opt3" name="answer2" value="{{ questions[1]['options'][2] }}"
+                              required>
+                         <label for="q2_opt3">{{ questions[1]['options'][2] }}</label><br>
+                         <input type="radio" id="q2_opt4" name="answer2" value="{{ questions[1]['options'][3] }}"
+                              required>
+                         <label for="q2_opt4">{{ questions[1]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <p>3. {{ questions[2]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q3_opt1" name="answer3" value="{{ questions[2]['options'][0] }}"
+                              required>
+                         <label for="q3_opt1">{{ questions[2]['options'][0] }}</label><br>
+                         <input type="radio" id="q3_opt2" name="answer3" value="{{ questions[2]['options'][1] }}"
+                              required>
+                         <label for="q3_opt2">{{ questions[2]['options'][1] }}</label><br>
+                         <input type="radio" id="q3_opt3" name="answer3" value="{{ questions[2]['options'][2] }}"
+                              required>
+                         <label for="q3_opt3">{{ questions[2]['options'][2] }}</label><br>
+                         <input type="radio" id="q3_opt4" name="answer3" value="{{ questions[2]['options'][3] }}"
+                              required>
+                         <label for="q3_opt4">{{ questions[2]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <p>4. {{ questions[3]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q4_opt1" name="answer4" value="{{ questions[3]['options'][0] }}"
+                              required>
+                         <label for="q4_opt1">{{ questions[3]['options'][0] }}</label><br>
+                         <input type="radio" id="q4_opt2" name="answer4" value="{{ questions[3]['options'][1] }}"
+                              required>
+                         <label for="q4_opt2">{{ questions[3]['options'][1] }}</label><br>
+                         <input type="radio" id="q4_opt3" name="answer4" value="{{ questions[3]['options'][2] }}"
+                              required>
+                         <label for="q4_opt3">{{ questions[3]['options'][2] }}</label><br>
+                         <input type="radio" id="q4_opt4" name="answer4" value="{{ questions[3]['options'][3] }}"
+                              required>
+                         <label for="q4_opt4">{{ questions[3]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <p>5. {{ questions[4]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q5_opt1" name="answer5" value="{{ questions[4]['options'][0] }}"
+                              required>
+                         <label for="q5_opt1">{{ questions[4]['options'][0] }}</label><br>
+                         <input type="radio" id="q5_opt2" name="answer5" value="{{ questions[4]['options'][1] }}"
+                              required>
+                         <label for="q5_opt2">{{ questions[4]['options'][1] }}</label><br>
+                         <input type="radio" id="q5_opt3" name="answer5" value="{{ questions[4]['options'][2] }}"
+                              required>
+                         <label for="q5_opt3">{{ questions[4]['options'][2] }}</label><br>
+                         <input type="radio" id="q5_opt4" name="answer5" value="{{ questions[4]['options'][3] }}"
+                              required>
+                         <label for="q5_opt4">{{ questions[4]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <p>6. {{ questions[5]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q6_opt1" name="answer6" value="{{ questions[5]['options'][0] }}"
+                              required>
+                         <label for="q6_opt1">{{ questions[5]['options'][0] }}</label><br>
+                         <input type="radio" id="q6_opt2" name="answer6" value="{{ questions[5]['options'][1] }}"
+                              required>
+                         <label for="q6_opt2">{{ questions[5]['options'][1] }}</label><br>
+                         <input type="radio" id="q6_opt3" name="answer6" value="{{ questions[5]['options'][2] }}"
+                              required>
+                         <label for="q6_opt3">{{ questions[5]['options'][2] }}</label><br>
+                         <input type="radio" id="q6_opt4" name="answer6" value="{{ questions[5]['options'][3] }}"
+                              required>
+                         <label for="q6_opt4">{{ questions[5]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <p>7. {{ questions[6]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q7_opt1" name="answer7" value="{{ questions[6]['options'][0] }}"
+                              required>
+                         <label for="q7_opt1">{{ questions[6]['options'][0] }}</label><br>
+                         <input type="radio" id="q7_opt2" name="answer7" value="{{ questions[6]['options'][1] }}"
+                              required>
+                         <label for="q7_opt2">{{ questions[6]['options'][1] }}</label><br>
+                         <input type="radio" id="q7_opt3" name="answer7" value="{{ questions[6]['options'][2] }}"
+                              required>
+                         <label for="q7_opt3">{{ questions[6]['options'][2] }}</label><br>
+                         <input type="radio" id="q7_opt4" name="answer7" value="{{ questions[6]['options'][3] }}"
+                              required>
+                         <label for="q7_opt4">{{ questions[6]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <p>8. {{ questions[7]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q8_opt1" name="answer8" value="{{ questions[7]['options'][0] }}"
+                              required>
+                         <label for="q8_opt1">{{ questions[7]['options'][0] }}</label><br>
+                         <input type="radio" id="q8_opt2" name="answer8" value="{{ questions[7]['options'][1] }}"
+                              required>
+                         <label for="q8_opt2">{{ questions[7]['options'][1] }}</label><br>
+                         <input type="radio" id="q8_opt3" name="answer8" value="{{ questions[7]['options'][2] }}"
+                              required>
+                         <label for="q8_opt3">{{ questions[7]['options'][2] }}</label><br>
+                         <input type="radio" id="q8_opt4" name="answer8" value="{{ questions[7]['options'][3] }}"
+                              required>
+                         <label for="q8_opt4">{{ questions[7]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <p>9. {{ questions[8]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q9_opt1" name="answer9" value="{{ questions[8]['options'][0] }}"
+                              required>
+                         <label for="q9_opt1">{{ questions[8]['options'][0] }}</label><br>
+                         <input type="radio" id="q9_opt2" name="answer9" value="{{ questions[8]['options'][1] }}"
+                              required>
+                         <label for="q9_opt2">{{ questions[8]['options'][1] }}</label><br>
+                         <input type="radio" id="q9_opt3" name="answer9" value="{{ questions[8]['options'][2] }}"
+                              required>
+                         <label for="q9_opt3">{{ questions[8]['options'][2] }}</label><br>
+                         <input type="radio" id="q9_opt4" name="answer9" value="{{ questions[8]['options'][3] }}"
+                              required>
+                         <label for="q9_opt4">{{ questions[8]['options'][3] }}</label><br>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <p>10. {{ questions[9]["question"] }}</p>
+                    <div>
+                         <input type="radio" id="q10_opt1" name="answer10" value="{{ questions[9]['options'][0] }}"
+                              required>
+                         <label for="q10_opt1">{{ questions[9]['options'][0] }}</label><br>
+                         <input type="radio" id="q10_opt2" name="answer10" value="{{ questions[9]['options'][1] }}"
+                              required>
+                         <label for="q10_opt2">{{ questions[9]['options'][1] }}</label><br>
+                         <input type="radio" id="q10_opt3" name="answer10" value="{{ questions[9]['options'][2] }}"
+                              required>
+                         <label for="q10_opt3">{{ questions[9]['options'][2] }}</label><br>
+                         <input type="radio" id="q10_opt4" name="answer10" value="{{ questions[9]['options'][3] }}"
+                              required>
+                         <label for="q10_opt4">{{ questions[9]['options'][3] }}</label><br>
+                    </div>
+
+                    <button type="submit">Submit Answers</button>
+               </form>
+          </div>
+</body>
+
+</html>

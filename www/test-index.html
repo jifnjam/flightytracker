@@ -4,27 +4,46 @@
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Flighty Tracker - Live Flight Tracker Map</title>
+       <script src="https://kit.fontawesome.com/b5e01068a9.js" crossorigin="anonymous"></script>
+       <link rel="stylesheet" href="static/home.css">
      </head>
      <body>
+       <div class="grid-container">
+         <header class="header">
           <nav>
-               <a>Language Translator</a> <!--language translator.py-->
-               <a>Wikipedia Searcher</a> <!--wikipediaexplorer.py-->
-               <a>Trivia Questions</a> <!--https://opentdb.com/-->
-               <a>Airport Info</a> <!--airportinfo.py--> 
+               <a>Trivia Questions</a> <!--https://opentdb.com/--> 
                <a>Country Info</a> <!--https://github.com/SteinRobert/python-restcountries-->
+               <a id="navtitle">Flighty Tracker</a>
           </nav>
           <h1>Flighty Tracker</h1>
-          <h2>Welcome to Flighty Tracker, a flight tracker web application that takes you on a journey around the world.
-               Powered by OpenSky Network and Bokeh</h2>
-          <form>
-               <label for="ctry-search">Country:</label>
-               <input type="search" id="ctry-search" name="gsearch" placeholder="United States">
-               <input type="submit" value="Submit">
-          </form>
-          <h3>Use the interactive tools to look at flights in the selected country of your choice. 
-               Hover over an aircraft to get more detailed information about it.</h3>
-          <iframe src="https://0194f1be-3489-68df-5657-40f13c2eabfa.share.connect.posit.cloud/" 
-          style="width:100%;height:1000px">
-          <footer>Connect with Me! (Github) </footer>
+          <h2 id="intro">Welcome to Flighty Tracker, a flight tracker web application that takes you on a journey around the world.</h2>
+           <h3 id="power">Powered by OpenSky Network and Bokeh</h3>
+         </header>
+       <div class="left">
+          <p>Use the interactive tools to look at flights in the selected country of your choice.</p>
+         <p>Hover over an aircraft to get more detailed information about it.</p>
+         </div>
+         <div class="main">
+           <iframe src="https://0194f1be-3489-68df-5657-40f13c2eabfa.share.connect.posit.cloud/"></iframe>
+         </div>
+         <div class="right">
+          <h1>Trivia Questions</h1>
+            <p>For the questioning mind.</p>
+           <p>These questions are about history and geography which are great topics to explore as you are on your aviation journey!</p>
+           <p>Click <a href="/trivia">here</a> to test your skills!</p>
+         </div>
+         <div class="bottom">
+            <h1>Country Info Searcher</h1>
+            <p>Here you can gather some basic information about the country you're traveling to.</p>
+            <p>Currencies, languages, calling codes, capital, etc. are provided. </p>
+            <p>Powered by <a href="http://restcountries.com">http://restcountries.com</a></p>
+         </div>
+       
+          <footer class="footer">This is an open-source project not intended for commercial purposes. &#169 Flighty Tracker 
+            <ul>
+              <a style="color:black;" href="https://github.com/jifnjam/flightytracker"><i class="fa-brands fa-github"></i></a>
+            </ul>
+              </footer>
+       </div>
      </body>
 </html>
