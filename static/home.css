@@ -4,8 +4,8 @@
    
    body {
      font-family: Arial, Helvetica, Georgia, sans-serif;
-     background-color: white;
      color: black;
+     background-color:#EFF6EE;
    }
    
    .grid-container {
@@ -13,31 +13,26 @@
      grid-template-areas:
        'header header header header header header' 
        'left main main main main right'
-       'bottom bottom bottom bottom bottom bottom'
        'footer footer footer footer footer footer';
      gap: 20px 15px;
+     background-color: #EFF6EE;
+
    }
    
    .header {
      grid-area: header;
      text-align: center;
-     background-color: gray;
+     background-color: #102542;
+     color: #EFF6EE;
    }
    
    .left {
      grid-area: left;
+
    }
    
    .right {
      grid-area: right;
-   }
-   
-   .right a {
-     color: blue;
-   }
-
-   .bottom {
-    grid-area: bottom;
    }
    
    .main {
@@ -46,7 +41,7 @@
    .main iframe {
      height: 90vh;
      width: 50vw;
-     border: 5px solid;
+     border: 5px solid #5a5858;
    }
    
    .footer {
@@ -58,11 +53,11 @@
    #power {
      text-align: center;
      font-family: "Roboto", sans-serif;
+     color: #EFF6EE;
    }
    
    nav {
      overflow: hidden;
-     background-color: gray;
    }
    
    nav a {
@@ -70,7 +65,8 @@
      padding: 10px;
      text-align: center;
      text-decoration: none;
-     color:black;
+     font-size: 1.2em;
+     color:#EFF6EE;
    }
 
    #navtitle {
@@ -82,5 +78,10 @@
    }
    
    #intro {
-     font-family: "Lucida Console" ;
+     font-family: "Arial" ;
+
+   }
+
+   .left, .right {
+    padding: 20px;
    }

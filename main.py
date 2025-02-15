@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect
 import requests
 import pandas as pd
 import os
+import random
 
 
 app = Flask(__name__)
@@ -14,19 +15,20 @@ def index():
 @app.route("/trivia")
 def trivia():
     # Generate questions and restart if resubmitting
-     if "questions" not in session:
-        r = requests.get("https://opentdb.com/api.php?amount=10&category=22&type=multiple")
+    my_category = random.randint(10,32)
+    if "questions" not in session:
+        r = requests.get(f"https://opentdb.com/api.php?amount=10&category={my_category}&type=multiple")
         trivia_data = r.json()
         questions = trivia_data['results']
 
         # Prepare options for each question
         for q in questions:
-          q["options"] = q["incorrect_answers"] + [q["correct_answer"]] # list of all options
-
+            q["options"] = q["incorrect_answers"] + [q["correct_answer"]] # list of all options
+            
         session["questions"] = questions #questions for this round
 
-     questions = session["questions"] #restores questions
-     return render_template("trivia.html", questions=questions)
+    questions = session["questions"] #restores questions
+    return render_template("trivia.html", questions=questions)
 
 @app.route("/trivia-submit", methods=["POST"])
 def trivia_submit():
@@ -49,11 +51,15 @@ def trivia_submit():
     # Return the result to the user
     return render_template("results.html", score=correct_answers)
 
+@app.route("/ctry")
+def ctry():
+    return render_template("country.html")
+
 @app.route("/ctry-info", methods=["GET", "POST"])
 def ctry_info():
     if request.method == 'POST':
-        ctry = request.form.get("ctryname")
-        r = requests.get("https://restcountries.com/v3.1/name/f'{ctry}?fields=name,capital,currencies,languages,car")
+        ctry = request.form.get("country")
+        r = requests.get(f"https://restcountries.com/v3.1/name/{ctry}?fields=name,capital,currencies,languages,car")
         response = r.json()
 
         for i in response[0]['currencies'].items():

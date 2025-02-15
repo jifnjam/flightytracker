@@ -19,18 +19,15 @@
                </nav>
                <h1>Flighty Tracker</h1>
                <h2 id="intro">Country Info Gatherer</h2>
-               <h3 id="power">Powered by <a href="http://restcountries.com">http://restcountries.com</a></h3>
+               <h3 id="power">Powered by <a style="color:white;" href="http://restcountries.com">http://restcountries.com</a></h3>
                <p>Here you can gather some basic information about the country you're traveling to.</p>
                <p>Currencies, languages, calling codes, capital, etc. are provided. </p>
           </header>
           <div class="main">
-               {% for i in result.itertuples() %}
-               <p>Country: {{i[0]}}</p>
-               <p>Currency: {{i[1]}}</p>
-               <p>Capital: {{i[2]}}</p>
-               <p>Languages: {{i[3]}}</p>
-               <p>What side of the street do cars drive on? {{i[4]}}</p>
-               {% endfor %}
+               <form action="/ctry-info" method="POST">
+                    <p id="label">Country: <input type="text" name="country" /></p>
+                    <button class="submit-btn" type="submit">Submit</button>
+               </form>
           </div>
           <footer class="footer">This is an open-source project not intended for commercial purposes. &#169 Flighty
                Tracker

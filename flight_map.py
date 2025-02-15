@@ -4,6 +4,7 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource, HoverTool, ImageURL
 import numpy as np
 from bokeh.io import curdoc
+import xyzservices.providers as xyz
 
 
 
@@ -49,10 +50,10 @@ def flight_map(doc):
                tools="wheel_zoom, reset, pan, zoom_in, zoom_out")
 
      # map tile
-     p.add_tile("Esri World Imagery", retina=True)
+     p.add_tile("OSM", retina=True)
 
      # map style
-     p.scatter(x='x', y='y', size=8, color="aquamarine", source=flight_source, marker="asterisk")
+     p.scatter(x='x', y='y', size=8, color="darkviolet", source=flight_source, marker="asterisk")
      p.xaxis.visible=False
      p.xgrid.visible = False
      p.yaxis.visible = False

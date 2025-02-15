@@ -13,13 +13,10 @@
      <div>
           <header class="header">
                <nav>
-                    <a>Language Translator</a>
-                    <a>Wikipedia Searcher</a>
-                    <a>Trivia Questions</a>
-                    <a>Airport Info</a>
-                    <a>Country Info</a>
-                    <a id="navtitle">Flighty Tracker</a>
-               </nav>
+                    <a href="/trivia">Trivia Questions</a> <!--https://opentdb.com/-->
+                    <a href="/ctry">Country Info</a> <!--https://github.com/SteinRobert/python-restcountries-->
+                    <a id="navtitle" href="/">Flighty Tracker</a>
+                  </nav>
                <h1>Trivia</h1>
                <h2 id="intro">Test your geography and history skills here to
                     broaden your knowledge of the great world around you.
@@ -196,8 +193,8 @@
                               required>
                          <label for="q10_opt4">{{ questions[9]['options'][3] }}</label><br>
                     </div>
-
-                    <button type="submit">Submit Answers</button>
+                    <br></br>
+                    <button class="submit-btn" type="submit">Submit Answers</button>
                </form>
           </div>
 </body>

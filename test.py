@@ -1,8 +1,9 @@
 import requests 
 import pandas as pd
 
+# this .py file is for development and testing of lines of code
 
-
+# most recent- restcountries data formatting
 r = requests.get("https://restcountries.com/v3.1/name/France?fields=name,capital,currencies,languages,car")
 response = r.json()
 
