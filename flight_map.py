@@ -70,7 +70,7 @@ def flight_map(doc):
           flight_source.data = new_data.to_dict(orient="list")
 
      doc.add_root(p) # add map to doc      
-     doc.add_periodic_callback(update, 2000) #update every 5 seconds
+     doc.add_periodic_callback(update, 5000) #update every 5 seconds
      doc.title = "Flight Tracker App"
 
 
