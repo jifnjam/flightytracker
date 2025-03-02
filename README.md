@@ -17,7 +17,7 @@ This is a flight tracker web application that uses OpenSky Network and Bokeh to 
 - Render: https://flightytracker.onrender.com 
 
 # Device Size
-- Desktops:white_check_mark:
+- Desktops :white_check_mark:
 - Laptops :white_check_mark:
 - Mobile (coming soon)
 
