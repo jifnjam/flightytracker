@@ -15,8 +15,9 @@ def index():
 @app.route("/trivia")
 def trivia():
     # Generate questions and restart if resubmitting
-    my_category = random.randint(10,32)
-    if "questions" not in session:
+    
+    def gather():
+        my_category = random.randint(10,32)
         r = requests.get(f"https://opentdb.com/api.php?amount=10&category={my_category}&type=multiple")
         trivia_data = r.json()
         questions = trivia_data['results']
@@ -26,8 +27,17 @@ def trivia():
             q["options"] = q["incorrect_answers"] + [q["correct_answer"]] # list of all options
             
         session["questions"] = questions #questions for this round
+        return session["questions"]
 
-    questions = session["questions"] #restores questions
+    if "questions" in session: #every other time
+        questions = None
+        renew = gather()
+    elif "questions" not in session: #first time
+        renew = gather()
+
+
+    questions = renew #restores questions
+    
     return render_template("trivia.html", questions=questions)
 
 @app.route("/trivia-submit", methods=["POST"])

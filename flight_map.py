@@ -53,7 +53,7 @@ def flight_map(doc):
      p.add_tile("OSM", retina=True)
 
      # map style
-     p.scatter(x='x', y='y', size=8, color="darkviolet", source=flight_source, marker="asterisk")
+     p.scatter(x='x', y='y', size=8, color="indigo", source=flight_source, marker="circle")
      p.xaxis.visible=False
      p.xgrid.visible = False
      p.yaxis.visible = False
@@ -70,8 +70,9 @@ def flight_map(doc):
           flight_source.data = new_data.to_dict(orient="list")
 
      doc.add_root(p) # add map to doc      
-     doc.add_periodic_callback(update, 5000) #update every 5 seconds
+     doc.add_periodic_callback(update, 2000) #update every 2 seconds
      doc.title = "Flight Tracker App"
+     print(loc_df.head())
 
 
 bokeh_doc = curdoc()
